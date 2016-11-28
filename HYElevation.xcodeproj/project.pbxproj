@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A62CEC1E1DE594CF00DCF18A /* HYViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A62CEC1D1DE594CF00DCF18A /* HYViewBase.m */; };
 		A631F2B61DE4953D006DD267 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A631F2B51DE4953D006DD267 /* main.m */; };
 		A631F2B91DE4953D006DD267 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A631F2B81DE4953D006DD267 /* AppDelegate.m */; };
-		A631F2BC1DE4953D006DD267 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A631F2BB1DE4953D006DD267 /* ViewController.m */; };
 		A631F2BF1DE4953D006DD267 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A631F2BD1DE4953D006DD267 /* Main.storyboard */; };
 		A631F2C11DE4953D006DD267 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A631F2C01DE4953D006DD267 /* Assets.xcassets */; };
 		A631F2C41DE4953D006DD267 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A631F2C21DE4953D006DD267 /* LaunchScreen.storyboard */; };
 		A631F2CF1DE4953E006DD267 /* HYElevationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A631F2CE1DE4953E006DD267 /* HYElevationTests.m */; };
 		A631F2DA1DE4953E006DD267 /* HYElevationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A631F2D91DE4953E006DD267 /* HYElevationUITests.m */; };
+		A6B754111DEA80A200200852 /* HYChartViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B754101DEA80A200200852 /* HYChartViewBase.m */; };
+		A6B754141DEA81EE00200852 /* HYChartDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B754131DEA81EE00200852 /* HYChartDataSet.m */; };
+		A6B7541D1DEA830000200852 /* HYElevationChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B7541C1DEA830000200852 /* HYElevationChartViewController.m */; };
+		A6B754201DEA840100200852 /* HYElevationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B7541F1DEA840100200852 /* HYElevationView.m */; };
+		A6B754251DEA86DF00200852 /* HYElevationPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B754241DEA86DF00200852 /* HYElevationPoint.m */; };
+		A6B754281DEA87A100200852 /* HYUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B754271DEA87A100200852 /* HYUtils.m */; };
+		A6B7542D1DEA8AB300200852 /* ElevationFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B7542C1DEA8AB300200852 /* ElevationFetcher.m */; };
+		A6B7545F1DEBCFD300200852 /* person.archive in Resources */ = {isa = PBXBuildFile; fileRef = A6B7545E1DEBCFD300200852 /* person.archive */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,12 +43,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A62CEC1C1DE594CF00DCF18A /* HYViewBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYViewBase.h; path = Views/HYViewBase.h; sourceTree = "<group>"; };
+		A62CEC1D1DE594CF00DCF18A /* HYViewBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYViewBase.m; path = Views/HYViewBase.m; sourceTree = "<group>"; };
 		A631F2B11DE4953D006DD267 /* HYElevation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HYElevation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A631F2B51DE4953D006DD267 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A631F2B71DE4953D006DD267 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A631F2B81DE4953D006DD267 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A631F2BA1DE4953D006DD267 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A631F2BB1DE4953D006DD267 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A631F2BE1DE4953D006DD267 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A631F2C01DE4953D006DD267 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A631F2C31DE4953D006DD267 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +59,25 @@
 		A631F2D51DE4953E006DD267 /* HYElevationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HYElevationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A631F2D91DE4953E006DD267 /* HYElevationUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HYElevationUITests.m; sourceTree = "<group>"; };
 		A631F2DB1DE4953E006DD267 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6B7540F1DEA80A200200852 /* HYChartViewBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYChartViewBase.h; sourceTree = "<group>"; };
+		A6B754101DEA80A200200852 /* HYChartViewBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYChartViewBase.m; sourceTree = "<group>"; };
+		A6B754121DEA81EE00200852 /* HYChartDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYChartDataSet.h; sourceTree = "<group>"; };
+		A6B754131DEA81EE00200852 /* HYChartDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYChartDataSet.m; sourceTree = "<group>"; };
+		A6B7541B1DEA830000200852 /* HYElevationChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYElevationChartViewController.h; sourceTree = "<group>"; };
+		A6B7541C1DEA830000200852 /* HYElevationChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYElevationChartViewController.m; sourceTree = "<group>"; };
+		A6B7541E1DEA840100200852 /* HYElevationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYElevationView.h; sourceTree = "<group>"; };
+		A6B7541F1DEA840100200852 /* HYElevationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYElevationView.m; sourceTree = "<group>"; };
+		A6B754211DEA852F00200852 /* HYConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HYConstant.h; sourceTree = "<group>"; };
+		A6B754221DEA856F00200852 /* HYColorConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HYColorConstant.h; sourceTree = "<group>"; };
+		A6B754231DEA86DF00200852 /* HYElevationPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYElevationPoint.h; sourceTree = "<group>"; };
+		A6B754241DEA86DF00200852 /* HYElevationPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYElevationPoint.m; sourceTree = "<group>"; };
+		A6B754261DEA87A100200852 /* HYUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYUtils.h; sourceTree = "<group>"; };
+		A6B754271DEA87A100200852 /* HYUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYUtils.m; sourceTree = "<group>"; };
+		A6B7542A1DEA889500200852 /* HYFontConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HYFontConstant.h; sourceTree = "<group>"; };
+		A6B7542B1DEA8AB300200852 /* ElevationFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElevationFetcher.h; sourceTree = "<group>"; };
+		A6B7542C1DEA8AB300200852 /* ElevationFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElevationFetcher.m; sourceTree = "<group>"; };
+		A6B754311DEA8D0B00200852 /* HYStringConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HYStringConstant.h; sourceTree = "<group>"; };
+		A6B7545E1DEBCFD300200852 /* person.archive */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = person.archive; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +128,14 @@
 		A631F2B31DE4953D006DD267 /* HYElevation */ = {
 			isa = PBXGroup;
 			children = (
+				A6B754581DEBCAE400200852 /* Resources */,
+				A6B754291DEA87A800200852 /* Utils */,
+				A6B7541A1DEA82E500200852 /* Constants */,
+				A6B754191DEA82D800200852 /* Controllers */,
+				A6B754181DEA82D100200852 /* Models */,
 				A631F2E71DE49669006DD267 /* Views */,
 				A631F2B71DE4953D006DD267 /* AppDelegate.h */,
 				A631F2B81DE4953D006DD267 /* AppDelegate.m */,
-				A631F2BA1DE4953D006DD267 /* ViewController.h */,
-				A631F2BB1DE4953D006DD267 /* ViewController.m */,
 				A631F2BD1DE4953D006DD267 /* Main.storyboard */,
 				A631F2C01DE4953D006DD267 /* Assets.xcassets */,
 				A631F2C21DE4953D006DD267 /* LaunchScreen.storyboard */,
@@ -144,8 +174,64 @@
 		A631F2E71DE49669006DD267 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A62CEC1C1DE594CF00DCF18A /* HYViewBase.h */,
+				A62CEC1D1DE594CF00DCF18A /* HYViewBase.m */,
+				A6B7540F1DEA80A200200852 /* HYChartViewBase.h */,
+				A6B754101DEA80A200200852 /* HYChartViewBase.m */,
+				A6B754121DEA81EE00200852 /* HYChartDataSet.h */,
+				A6B754131DEA81EE00200852 /* HYChartDataSet.m */,
+				A6B7541E1DEA840100200852 /* HYElevationView.h */,
+				A6B7541F1DEA840100200852 /* HYElevationView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		A6B754181DEA82D100200852 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A6B754231DEA86DF00200852 /* HYElevationPoint.h */,
+				A6B754241DEA86DF00200852 /* HYElevationPoint.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A6B754191DEA82D800200852 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A6B7541B1DEA830000200852 /* HYElevationChartViewController.h */,
+				A6B7541C1DEA830000200852 /* HYElevationChartViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A6B7541A1DEA82E500200852 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A6B754211DEA852F00200852 /* HYConstant.h */,
+				A6B754221DEA856F00200852 /* HYColorConstant.h */,
+				A6B7542A1DEA889500200852 /* HYFontConstant.h */,
+				A6B754311DEA8D0B00200852 /* HYStringConstant.h */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		A6B754291DEA87A800200852 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A6B754261DEA87A100200852 /* HYUtils.h */,
+				A6B754271DEA87A100200852 /* HYUtils.m */,
+				A6B7542B1DEA8AB300200852 /* ElevationFetcher.h */,
+				A6B7542C1DEA8AB300200852 /* ElevationFetcher.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		A6B754581DEBCAE400200852 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A6B7545E1DEBCFD300200852 /* person.archive */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A631F2C41DE4953D006DD267 /* LaunchScreen.storyboard in Resources */,
+				A6B7545F1DEBCFD300200852 /* person.archive in Resources */,
 				A631F2C11DE4953D006DD267 /* Assets.xcassets in Resources */,
 				A631F2BF1DE4953D006DD267 /* Main.storyboard in Resources */,
 			);
@@ -284,9 +371,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A631F2BC1DE4953D006DD267 /* ViewController.m in Sources */,
+				A6B754281DEA87A100200852 /* HYUtils.m in Sources */,
+				A6B754251DEA86DF00200852 /* HYElevationPoint.m in Sources */,
+				A6B7541D1DEA830000200852 /* HYElevationChartViewController.m in Sources */,
+				A6B754141DEA81EE00200852 /* HYChartDataSet.m in Sources */,
+				A6B754111DEA80A200200852 /* HYChartViewBase.m in Sources */,
 				A631F2B91DE4953D006DD267 /* AppDelegate.m in Sources */,
+				A62CEC1E1DE594CF00DCF18A /* HYViewBase.m in Sources */,
+				A6B7542D1DEA8AB300200852 /* ElevationFetcher.m in Sources */,
 				A631F2B61DE4953D006DD267 /* main.m in Sources */,
+				A6B754201DEA840100200852 /* HYElevationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +618,7 @@
 				A631F2E01DE4953E006DD267 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A631F2E11DE4953E006DD267 /* Build configuration list for PBXNativeTarget "HYElevationTests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +627,7 @@
 				A631F2E31DE4953E006DD267 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A631F2E41DE4953E006DD267 /* Build configuration list for PBXNativeTarget "HYElevationUITests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +636,7 @@
 				A631F2E61DE4953E006DD267 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
