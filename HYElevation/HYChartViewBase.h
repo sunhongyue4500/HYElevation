@@ -18,15 +18,13 @@
 - (void)chartKlineScrollLeft:(HYViewBase *)chartView;
 
 /** chart changed*/
-- (void)chartReload:(HYViewBase *)chartView;
+- (void)chartChanged:(HYViewBase *)chartView;
 
 @end
 
 @interface HYChartViewBase : HYViewBase
 
-/** 上面的chart高度所占比例所占比例*/
-@property (nonatomic,assign) CGFloat uperChartHeightScale;
-/** 中间空白的区域高度*/
+/** bottom footer height*/
 @property (nonatomic,assign) CGFloat xAxisHeitht;
 
 @property (nonatomic,strong) UIColor *gridBackgroundColor;
@@ -38,16 +36,15 @@
 @property (nonatomic,assign)CGFloat minElevation;
 @property (nonatomic,assign)CGFloat maxVolume;
 @property (nonatomic,assign)CGFloat candleCoordsScale;
-@property (nonatomic,assign)CGFloat volumeCoordsScale;
 
 @property (nonatomic,assign)NSInteger highlightLineCurrentIndex;
 @property (nonatomic,assign)CGPoint highlightLineCurrentPoint;
 @property (nonatomic,assign)BOOL highlightLineCurrentEnabled;
 
-@property (nonatomic,strong)NSDictionary * leftYAxisAttributedDic;
-@property (nonatomic,strong)NSDictionary * xAxisAttributedDic;
-@property (nonatomic,strong)NSDictionary * highlightAttributedDic;
-@property (nonatomic,strong)NSDictionary * defaultAttributedDic;
+@property (nonatomic,strong)NSDictionary *leftYAxisAttributedDic;
+@property (nonatomic,strong)NSDictionary *xAxisAttributedDic;
+@property (nonatomic,strong)NSDictionary *highlightAttributedDic;
+@property (nonatomic,strong)NSDictionary *defaultAttributedDic;
 
 @property (nonatomic,assign)BOOL highlightLineShowEnabled;
 @property (nonatomic,assign)BOOL scrollEnabled;
@@ -79,18 +76,16 @@
          horizonFlag:(BOOL)flag;
 
 /** draw circle point*/
--(void)drawCiclyPoint:(CGContextRef)context
+-(void)drawCirclePoint:(CGContextRef)context
                 point:(CGPoint)point
                radius:(CGFloat)radius
                 color:(UIColor*)color;
 
 - (void)drawHighlighted:(CGContextRef)context
                   point:(CGPoint)point
-                   idex:(NSInteger)idex
-                  value:(id)value
-                  color:(UIColor *)color
+            circleColor:(UIColor *)circleColor
+              lineColor:(UIColor *)lineColor
               lineWidth:(CGFloat)lineWidth;
-
 
 - (void)drawLabel:(CGContextRef)context
    attributesText:(NSAttributedString *)attributesText

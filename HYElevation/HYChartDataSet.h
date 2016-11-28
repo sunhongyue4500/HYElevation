@@ -13,8 +13,7 @@
 
 @property (nonatomic,strong)NSMutableArray * data;
 @property (nonatomic,assign)CGFloat highlightLineWidth;
-@property (nonatomic,strong)UIColor  * highlightLineColor;
+@property (nonatomic,strong)UIColor *highlightLineColor;
 @property (nonatomic,assign)CGFloat  avgLineWidth;
-@property (nonatomic,assign)CGFloat candleTopBottmLineWidth;
 
 @end

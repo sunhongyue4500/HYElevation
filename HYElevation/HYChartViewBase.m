@@ -44,16 +44,13 @@
 
 - (void)drawHighlighted:(CGContextRef)context
                   point:(CGPoint)point
-                   idex:(NSInteger)idex
-                  value:(id)value
-                  color:(UIColor *)color
+            circleColor:(UIColor *)circleColor
+              lineColor:(UIColor *)lineColor
               lineWidth:(CGFloat)lineWidth
 {
-    [self drawDashline:context startPoint:CGPointMake(point.x, self.contentTop) stopPoint:CGPointMake(point.x, self.contentBottom) color:color lineWidth:0.8 realDistance:8 dashDistance:2 horizonFlag:NO];
-    
-    CGFloat radius = 3.0;
-    CGContextSetFillColorWithColor(context, color.CGColor);
-    CGContextFillEllipseInRect(context, CGRectMake(point.x-(radius/2.0), point.y-(radius/2.0), radius, radius));
+    [self drawDashline:context startPoint:CGPointMake(point.x, self.contentBottom) stopPoint:CGPointMake(point.x, self.contentTop) color:lineColor lineWidth:0.8 realDistance:7 dashDistance:3 horizonFlag:NO];
+    CGFloat radius = 5.0;
+    [self drawCirclePoint:context point:CGPointMake(point.x - (radius / 2.0), point.y - (radius / 2.0)) radius:radius color:circleColor];
 }
 
 - (void)drawLabel:(CGContextRef)context
@@ -61,7 +58,6 @@
              rect:(CGRect)rect
 {
     [attributesText drawInRect:rect];
-    //[self drawRect:context rect:rect color:[UIColor clearColor]];
 }
 
 - (void)drawRect:(CGContextRef)context
@@ -111,7 +107,6 @@
     CGContextFillPath(context);
 }
 
-/**array 未闭合 */
 - (void)drawPath:(CGContextRef)context
        fillColor:(UIColor*)fillColor
           points:(NSArray *)array
@@ -149,15 +144,12 @@
 
 
 
--(void)drawCiclyPoint:(CGContextRef)context
+-(void)drawCirclePoint:(CGContextRef)context
                 point:(CGPoint)point
                radius:(CGFloat)radius
                 color:(UIColor*)color{
     CGContextSetFillColorWithColor(context, color.CGColor);
-    CGContextSetStrokeColorWithColor(context, color.CGColor);
-    CGContextSetLineWidth(context, 1.0);
-    CGContextAddArc(context, point.x, point.y, radius, 0, 2*M_PI, 0);
-    CGContextDrawPath(context, kCGPathFillStroke);
+    CGContextFillEllipseInRect(context, CGRectMake(point.x, point.y, radius, radius));
 }
 
 - (void)drawline:(CGContextRef)context
@@ -188,20 +180,24 @@
 {
     CGContextSetStrokeColorWithColor(context, color.CGColor);
     CGContextSetLineWidth(context, lineWitdth);
+    int asend;
+    double darwCount;
     if (flag) {
-        double darwCount = (stopPoint.x - startPoint.x) / (realDistance + dashDistance);
-        for (int i = 0; i <= round(darwCount); i++) {
+        darwCount = (stopPoint.x - startPoint.x) / (realDistance + dashDistance);
+        asend = (stopPoint.x >= startPoint.x ? 1 : -1);
+        for (int i = 0; i <= round(fabs(darwCount)); i++) {
             CGContextBeginPath(context);
-            CGContextMoveToPoint(context, startPoint.x + (realDistance + dashDistance) * i, startPoint.y);
-            CGContextAddLineToPoint(context, startPoint.x + (realDistance + dashDistance) * i + realDistance, startPoint.y);
+            CGContextMoveToPoint(context, startPoint.x + (realDistance + dashDistance) * i * asend, startPoint.y);
+            CGContextAddLineToPoint(context, startPoint.x + ((realDistance + dashDistance) * i + realDistance) * asend, startPoint.y);
             CGContextStrokePath(context);
         }
     } else {
-        double darwCount = (stopPoint.y - startPoint.y) / (realDistance + dashDistance);
-        for (int i = 0; i <= round(darwCount); i++) {
+        darwCount = (stopPoint.y - startPoint.y) / (realDistance + dashDistance);
+        asend = (stopPoint.y >= startPoint.y ? 1 : -1);
+        for (int i = 0; i <= round(fabs(darwCount)); i++) {
             CGContextBeginPath(context);
-            CGContextMoveToPoint(context, startPoint.x, startPoint.y + (realDistance + dashDistance) * i);
-            CGContextAddLineToPoint(context, startPoint.x, startPoint.y + (realDistance + dashDistance) * i + realDistance);
+            CGContextMoveToPoint(context, startPoint.x, startPoint.y + (realDistance + dashDistance) * i * asend);
+            CGContextAddLineToPoint(context, startPoint.x, startPoint.y + ((realDistance + dashDistance) * i + realDistance) * asend) ;
             CGContextStrokePath(context);
         }
     }

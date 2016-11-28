@@ -14,14 +14,14 @@
 @implementation HYUtils
 
 /**
- *  计算两个经纬位置点的距离 参考：http://www.movable-type.co.uk/scripts/latlong.html
+ *  calculate two position distance 参考：http://www.movable-type.co.uk/scripts/latlong.html
  *
  *  @param lon1 lon1(deg)
  *  @param lat1 lat1(deg)
  *  @param lon2 lon2(deg)
  *  @param lat2 lat2(deg)
  *
- *  @return 大圆距离(km)
+ *  @return great circle distance(km)
  */
 + (double)distanceBetween:(double)lon1 lat1:(double)lat1 andlon2:(double)lon2 lat2:(double)lat2 {
     /*
@@ -51,14 +51,14 @@ double convert2Deg(double rad) {
 }
 
 /**
- 获取与直线yLine的交点
+ intersection point of line(point1 to point2) and line yLine
  
- @param x <#x description#>
- @param y <#y description#>
- @param point1 <#point1 description#>
- @param point2 <#point2 description#>
- @param yLine 直线y = yline
- @return NO, 无交点；YES,有交点
+ @param x x coordinate return
+ @param y y coordinate returnq
+ @param point1 point1
+ @param point2 point2
+ @param yLine  line y = yline
+ @return YES indicates theres is a intersection point
  */
 + (BOOL)getX:(double *)x Y:(double *)y withPoint1:(CGPoint)point1 point2:(CGPoint)point2 withLineY:(double)yLine {
     double minY = (point1.y <= point2.y ? point1.y : point2.y);

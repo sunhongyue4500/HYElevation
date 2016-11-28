@@ -14,7 +14,7 @@
 
 @implementation HYElevationPoint
 
-- (void) encodeWithCoder:(NSCoder *)encoder {
+- (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:self.elevationPointName forKey:@"elevationPointName"];
     [encoder encodeInt:self.index forKey:@"index"];
     [encoder encodeDouble:self.lon forKey:@"lon"];
@@ -24,7 +24,7 @@
     [encoder encodeInt:self.elevation forKey:@"elevation"];
 }
 
-- (id)initWithCoder:(NSCoder *)decoder {
+- (instancetype)initWithCoder:(NSCoder *)decoder {
     self.elevationPointName = [decoder decodeObjectForKey:@"elevationPointName"];
     self.index = [decoder decodeIntForKey:@"index"];
     self.lon = [decoder decodeDoubleForKey:@"lon"];

@@ -4,7 +4,6 @@
 //
 //  Created by Sunhy on 16/11/23.
 //  Copyright © 2016年 Sunhy. All rights reserved.
-//  https://github.com/sunhongyue4500/HYElevation
 
 #import "HYViewBase.h"
 
@@ -45,7 +44,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
--(void)layoutSubviews{
+- (void)layoutSubviews{
     CGRect  bounds = self.bounds;
     if ((bounds.size.width != self.chartWidth ||
          bounds.size.height != self.chartHeight))
@@ -55,7 +54,7 @@
     }
 }
 
--(void) deviceOrientationDidChange:(NSNotification *) notification
+- (void) deviceOrientationDidChange:(NSNotification *) notification
 {
     if([UIDevice currentDevice].orientation!=UIDeviceOrientationUnknown)
     {
@@ -166,13 +165,6 @@
     
 }
 
-/** rect2 intersection rect1 in X-axis*/
-BOOL isXIntersectionWithRect(CGRect rect2, CGRect rect1) {
-    if (rect2.origin.x >= rect1.origin.x && rect2.origin.x <= rect1.origin.x + rect1.size.width ) return YES;
-    if (rect1.origin.x >= rect2.origin.x && rect1.origin.x <= rect2.origin.x + rect2.size.width ) return YES;
-    return NO;
-}
-
 - (CGFloat)contentTop
 {
     return _contentRect.origin.y;
@@ -203,5 +195,11 @@ BOOL isXIntersectionWithRect(CGRect rect2, CGRect rect1) {
     return _contentRect.size.height;
 }
 
+/** rect2 intersection rect1 in X-axis*/
+BOOL isXIntersectionWithRect(CGRect rect2, CGRect rect1) {
+    if (rect2.origin.x >= rect1.origin.x && rect2.origin.x <= rect1.origin.x + rect1.size.width ) return YES;
+    if (rect1.origin.x >= rect2.origin.x && rect1.origin.x <= rect2.origin.x + rect2.size.width ) return YES;
+    return NO;
+}
 
 @end

@@ -10,6 +10,7 @@
 
 @interface ElevationFetcher : NSObject
 
+/** just a test method with fake data*/
 + (NSArray *)fetchTestElevationPointsData;
 
 @end

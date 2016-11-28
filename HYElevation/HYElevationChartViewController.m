@@ -38,20 +38,17 @@
     [super viewDidLoad];
     
     [self.elevationLineView setupChartOffsetWithLeft:0 top:10 right:0 bottom:16];
-    self.elevationLineView.gridBackgroundColor = [UIColor whiteColor];
-    self.elevationLineView.borderColor = [UIColor colorWithRed:203/255.0 green:215/255.0 blue:224/255.0 alpha:1.0];
+    self.elevationLineView.gridBackgroundColor = kElevationChartClearColor;
+    self.elevationLineView.borderColor = kElevationChartBorderColor;
     self.elevationLineView.borderWidth = .5;
     self.elevationLineView.bottomRectHeight = 16;
     
     self.elevationLineView.candleWidth = 8;
     self.elevationLineView.candleMaxWidth = 30;
     
-    self.elevationLineView.uperChartHeightScale = 1;
-    
     self.elevationLineView.xAxisHeitht = 25;
-    self.elevationLineView.xAxisAttributedDic = @{NSFontAttributeName:[UIFont systemFontOfSize:10],
-                                                  NSForegroundColorAttributeName:[UIColor whiteColor]};
-    
+    self.elevationLineView.xAxisAttributedDic = @{NSFontAttributeName:kElevationChartFooterFont,
+                                                  NSForegroundColorAttributeName:kElevationChartClearColor};
     self.elevationLineView.delegate = self;
     self.elevationLineView.highlightLineShowEnabled = YES;
     self.elevationLineView.zoomEnabled = YES;
@@ -62,7 +59,6 @@
     
     // Set DataSource
     NSArray *array = [ElevationFetcher fetchTestElevationPointsData];
-    [self setDataset:self.dataset];
     [self setChartData:array];
 }
 
@@ -77,6 +73,11 @@
     if (self.elevationLineView.altitudeAdvisor <= 1000) {
         self.elevationLineView.altitudeAdvisor = [HYUtils altitudeAdvisor];
     }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - **************** Delegate
@@ -94,13 +95,8 @@
     
 }
 
-- (void)chartReload:(HYViewBase *)chartView {
+- (void)chartChanged:(HYViewBase *)chartView {
     [self configRightLabel];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - **************** DataSource
@@ -125,6 +121,7 @@
     return _dataset;
 }
 
+#pragma mark - **************** Other Config
 /** config right label*/
 - (void)configRightLabel {
     dispatch_async(dispatch_get_main_queue(), ^{

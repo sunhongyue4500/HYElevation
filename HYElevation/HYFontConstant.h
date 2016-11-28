@@ -9,12 +9,10 @@
 #ifndef HYFontConstant_h
 #define HYFontConstant_h
 
-#pragma mark - **************** elevation rectangle
-#define kElevationRectangleFont [UIFont fontWithName:@"Menlo-Regular" size:9]
-
 #pragma mark - **************** elevation chart
 #define kElevationChartMeasureScaleFont [UIFont systemFontOfSize:10]
-#define kElevationChartAltitudeAdvisorFont [UIFont systemFontOfSize:14]
+#define kElevationChartFooterFont kElevationChartMeasureScaleFont
+#define kElevationChartAltitudeAdvisorBtnTitleFont [UIFont boldSystemFontOfSize:10]
 
 
 #endif /* HYFontConstant_h */

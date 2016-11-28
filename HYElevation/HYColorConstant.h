@@ -9,8 +9,6 @@
 #ifndef HYColorConstant_h
 #define HYColorConstant_h
 
-#define kElevationChartClearColor [UIColor whiteColor]
-
 #pragma mark - **************** Main Panel
 #define kMainPanelBackgroundColor [UIColor colorWithRed:85/255.0 green:85/255.0 blue:85/255.0 alpha:1.0]
 
@@ -21,6 +19,8 @@
 #define kElevationChartMeasureScaleColor [UIColor colorWithRed:166/255.0 green:168/255.0 blue:167/255.0 alpha:1]
 #define kElevationChartClearColor [UIColor whiteColor]
 #define kElevationChartAltitudeAdvisorRectFillColor [[UIColor blackColor] colorWithAlphaComponent:0.6]
+#define kElevationChartBorderColor [UIColor colorWithRed:203/255.0 green:215/255.0 blue:224/255.0 alpha:1.0]
+#define kElevationChartAltitudeAdvisorBtnColor [[UIColor blackColor] colorWithAlphaComponent:0.6]
 
 #define kElevationChartGreenArea [UIColor greenColor]
 #define kElevationChartYellowArea [UIColor yellowColor]
