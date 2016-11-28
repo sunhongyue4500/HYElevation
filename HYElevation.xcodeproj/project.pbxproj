@@ -22,7 +22,7 @@
 		A6B754251DEA86DF00200852 /* HYElevationPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B754241DEA86DF00200852 /* HYElevationPoint.m */; };
 		A6B754281DEA87A100200852 /* HYUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B754271DEA87A100200852 /* HYUtils.m */; };
 		A6B7542D1DEA8AB300200852 /* ElevationFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B7542C1DEA8AB300200852 /* ElevationFetcher.m */; };
-		A6B7545F1DEBCFD300200852 /* person.archive in Resources */ = {isa = PBXBuildFile; fileRef = A6B7545E1DEBCFD300200852 /* person.archive */; };
+		A6B7545F1DEBCFD300200852 /* elevationData.archive in Resources */ = {isa = PBXBuildFile; fileRef = A6B7545E1DEBCFD300200852 /* elevationData.archive */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +77,7 @@
 		A6B7542B1DEA8AB300200852 /* ElevationFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElevationFetcher.h; sourceTree = "<group>"; };
 		A6B7542C1DEA8AB300200852 /* ElevationFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElevationFetcher.m; sourceTree = "<group>"; };
 		A6B754311DEA8D0B00200852 /* HYStringConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HYStringConstant.h; sourceTree = "<group>"; };
-		A6B7545E1DEBCFD300200852 /* person.archive */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = person.archive; sourceTree = "<group>"; };
+		A6B7545E1DEBCFD300200852 /* elevationData.archive */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = elevationData.archive; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,7 +229,7 @@
 		A6B754581DEBCAE400200852 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A6B7545E1DEBCFD300200852 /* person.archive */,
+				A6B7545E1DEBCFD300200852 /* elevationData.archive */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -344,7 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A631F2C41DE4953D006DD267 /* LaunchScreen.storyboard in Resources */,
-				A6B7545F1DEBCFD300200852 /* person.archive in Resources */,
+				A6B7545F1DEBCFD300200852 /* elevationData.archive in Resources */,
 				A631F2C11DE4953D006DD267 /* Assets.xcassets in Resources */,
 				A631F2BF1DE4953D006DD267 /* Main.storyboard in Resources */,
 			);
