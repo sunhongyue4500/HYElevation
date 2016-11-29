@@ -1,5 +1,6 @@
 # HYElevation
-[]:https://github.com/sunhongyue4500/HYElevation/raw/master/Screenshots/HYElevation.gif
+
+![](https://github.com/sunhongyue4500/HYElevation/raw/master/Screenshots/HYElevation.gif)  
 
 Introducing <b>HYElevation - </b> iOS-based one-dimensional terrain elevation chart for general aviation. 
 
