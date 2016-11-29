@@ -29,6 +29,11 @@
 @property (nonatomic, strong) UIButton *altitudeAdvisorBtn;
 @property (nonatomic, assign) CGFloat lastPinScale;
 @property (nonatomic, assign) CGFloat lastPinCount;
+/** Pinch center point*/
+@property (nonatomic, assign) CGPoint pinchCenterPoint;
+/** 中心点索引*/
+@property (nonatomic, assign) int pinchCenterPointIndex;
+
 
 @property (nonatomic, assign, readwrite) double highestPointValue;
 @property (nonatomic, assign, readwrite) double clearanceValue;
@@ -57,6 +62,7 @@
 - (void)commonInit {
     self.candleCoordsScale = 0.f;
     self.measureWidth = 8;
+    self.lastPinScale = 1.0;
     
     [self addGestureRecognizer:self.panGesture];
     [self addGestureRecognizer:self.pinGesture];
@@ -474,29 +480,31 @@
     
     self.highlightLineCurrentEnabled = NO;
     
-    recognizer.scale= recognizer.scale - self.lastPinScale + 1;
-    
-    self.candleWidth = recognizer.scale * self.candleWidth;
-    
-    if(self.candleWidth > self.candleMaxWidth){
-        self.candleWidth = self.candleMaxWidth;
+    if (recognizer.state == UIGestureRecognizerStateEnded)  {
+        self.lastPinScale = 1.0f;
+        return;
     }
-    if(self.candleWidth < self.candleMinWidth){
-        self.candleWidth = self.candleMinWidth;
-    }
-    
-    NSInteger offset = (NSInteger)((self.lastPinCount -self.countOfShow)/2);
-    
-    if (labs(offset)) {
-#ifdef DEBUG
-        NSLog(@"offset %ld",(long)offset);
-#endif
-        self.lastPinCount = self.countOfShow;
-        self.startDrawIndex = self.startDrawIndex + offset;
+    if (recognizer.state == UIGestureRecognizerStateBegan)  {
+        // 确立中心点
+        CGPoint point0 = [recognizer locationOfTouch:0 inView:self];
+        CGPoint point1 = [recognizer locationOfTouch:1 inView:self];
+        self.pinchCenterPoint = CGPointMake((point0.x + point1.x) / 2, (point0.y + point1.y) / 2);
+        self.pinchCenterPointIndex = (self.pinchCenterPoint.x - self.contentLeft) / self.candleWidth + self.startDrawIndex;
+    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        recognizer.scale= recognizer.scale - self.lastPinScale + 1;
+        self.candleWidth = recognizer.scale * self.candleWidth;
+        if(self.candleWidth > self.candleMaxWidth){
+            self.candleWidth = self.candleMaxWidth;
+        }
+        if(self.candleWidth < self.candleMinWidth){
+            self.candleWidth = self.candleMinWidth;
+        }
+        // 计算startDrawIndex
+        self.startDrawIndex = self.pinchCenterPointIndex - (self.pinchCenterPoint.x - self.contentLeft) / self.candleWidth;
         [self setNeedsDisplay];
     }
 #ifdef DEBUG
-    NSLog(@"%ld",(long)self.startDrawIndex);
+    NSLog(@"recognizer.scale:%f", recognizer.scale);
 #endif
     self.lastPinScale = recognizer.scale;
 }
