@@ -178,8 +178,6 @@
 				A62CEC1D1DE594CF00DCF18A /* HYViewBase.m */,
 				A6B7540F1DEA80A200200852 /* HYChartViewBase.h */,
 				A6B754101DEA80A200200852 /* HYChartViewBase.m */,
-				A6B754121DEA81EE00200852 /* HYChartDataSet.h */,
-				A6B754131DEA81EE00200852 /* HYChartDataSet.m */,
 				A6B7541E1DEA840100200852 /* HYElevationView.h */,
 				A6B7541F1DEA840100200852 /* HYElevationView.m */,
 			);
@@ -191,6 +189,8 @@
 			children = (
 				A6B754231DEA86DF00200852 /* HYElevationPoint.h */,
 				A6B754241DEA86DF00200852 /* HYElevationPoint.m */,
+				A6B754121DEA81EE00200852 /* HYChartDataSet.h */,
+				A6B754131DEA81EE00200852 /* HYChartDataSet.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -535,7 +535,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Buaa.HYElevation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -549,7 +549,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Buaa.HYElevation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

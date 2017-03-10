@@ -21,22 +21,24 @@
 /** Elevation DataSet*/
 @property (nonatomic, strong) HYChartDataSet *dataset;
 /** Elevation Graph View*/
-@property (weak, nonatomic) IBOutlet HYElevationView *elevationLineView;
+@property (nonatomic, weak) IBOutlet HYElevationView *elevationLineView;
 
-@property (weak, nonatomic) IBOutlet UILabel *highestPointLabel;
-@property (weak, nonatomic) IBOutlet UILabel *highestPointValueLabel;
-@property (weak, nonatomic) IBOutlet UILabel *clearanceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *clearanceValueLabel;
-@property (weak, nonatomic) IBOutlet UILabel *firstStrikeLable;
-@property (weak, nonatomic) IBOutlet UILabel *firstStrikeValueLable;
+@property (nonatomic, weak) IBOutlet UILabel *highestPointLabel;
+@property (nonatomic, weak) IBOutlet UILabel *highestPointValueLabel;
+@property (nonatomic, weak) IBOutlet UILabel *clearanceLabel;
+@property (nonatomic, weak) IBOutlet UILabel *clearanceValueLabel;
+@property (nonatomic, weak) IBOutlet UILabel *firstStrikeLable;
+@property (nonatomic, weak) IBOutlet UILabel *firstStrikeValueLable;
 
 @end
 
 @implementation HYElevationChartViewController
 
+#pragma mark - **************** Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self.elevationLineView setupChartOffsetWithLeft:0 top:10 right:0 bottom:16];
     self.elevationLineView.gridBackgroundColor = kElevationChartClearColor;
     self.elevationLineView.borderColor = kElevationChartBorderColor;
@@ -53,11 +55,10 @@
     self.elevationLineView.highlightLineShowEnabled = YES;
     self.elevationLineView.zoomEnabled = YES;
     self.elevationLineView.scrollEnabled = YES;
-    
     self.elevationLineView.redWarning = redWarnDefaultValue;
     self.elevationLineView.yellowWarning = yellowWarnDefaultValue;
     
-    // Set DataSource
+    // Test Fake DataSource
     NSArray *array = [ElevationFetcher fetchTestElevationPointsData];
     [self setChartData:array];
 }
@@ -80,33 +81,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - **************** Delegate
--(void)chartValueSelected:(HYViewBase *)chartView entry:(id)entry entryIndex:(NSInteger)entryIndex
-{
-    //HYElevationPoint *point = (HYElevationPoint *)entry;
-    //HYElevationPoint *startPoint = (HYElevationPoint *)[[self.elevationLineView dataSetData] objectAtIndex:0];
-}
+#pragma mark - **************** Custom Accessors
 
-- (void)chartValueNothingSelected:(HYViewBase *)chartView {
-    
-}
-
-- (void)chartKlineScrollLeft:(HYViewBase *)chartView {
-    
-}
-
-- (void)chartChanged:(HYViewBase *)chartView {
-    [self configRightLabel];
-}
-
-#pragma mark - **************** DataSource
-- (void)setChartData:(NSArray *)chartData {
-    if (chartData) {
-        [self.elevationLineView setupData:chartData];
-    }
-}
-
-#pragma mark - **************** getter
 - (ElevationFetcher *)elevationFetcher {
     if (!_elevationFetcher) {
         _elevationFetcher = [[ElevationFetcher alloc] init];
@@ -121,13 +97,40 @@
     return _dataset;
 }
 
+#pragma mark - **************** Private
+
+- (void)setChartData:(NSArray *)chartData {
+    if (chartData) {
+        [self.elevationLineView setupData:chartData];
+    }
+}
+
+#pragma mark - **************** Protocol conformance
+#pragma mark - **************** HYChartViewDelegate
+
+-(void)chartValueSelected:(HYViewBase *)chartView entry:(id)entry entryIndex:(NSInteger)entryIndex
+{
+}
+
+- (void)chartValueNothingSelected:(HYViewBase *)chartView {
+    
+}
+
+- (void)chartLineScrollLeft:(HYViewBase *)chartView {
+    
+}
+
+- (void)chartChanged:(HYViewBase *)chartView {
+    [self configRightLabel];
+}
+
 #pragma mark - **************** Other Config
-/** config right label*/
+/** config label*/
 - (void)configRightLabel {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.highestPointValueLabel.text = [NSString stringWithFormat:@"%.fm", self.elevationLineView.highestPointValue];
         self.clearanceValueLabel.text = [NSString stringWithFormat:@"%.fm", self.elevationLineView.clearanceValue];
-        double distance = -1;
+        CGFloat distance = -1;
         if (self.elevationLineView.dataSetData.count != 0) {
             HYElevationPoint *point1 = [self.elevationLineView.dataSetData objectAtIndex:0];
             if (self.elevationLineView.firstStrikeIndex - 1 < 0) {
@@ -163,6 +166,15 @@
             self.clearanceValueLabel.textColor = kElevationChartLabelDefaultColor;
         }
     });
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    NSString *deviceType = [UIDevice currentDevice].model;
+    if ([deviceType isEqualToString:@"iPhone"]) {
+        return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+    } else {
+        return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationPortrait;
+    }
 }
 
 @end

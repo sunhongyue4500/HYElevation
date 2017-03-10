@@ -23,30 +23,30 @@
  *
  *  @return great circle distance(km)
  */
-+ (double)distanceBetween:(double)lon1 lat1:(double)lat1 andlon2:(double)lon2 lat2:(double)lat2 {
++ (CGFloat)distanceBetween:(CGFloat)lon1 lat1:(CGFloat)lat1 andlon2:(CGFloat)lon2 lat2:(CGFloat)lat2 {
     /*
      a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)
      c = 2 ⋅ atan2( √a, √(1−a) )
      d = R ⋅ c
      */
-    double FI1 = convert2Radin(lat1);
-    double FI2 = convert2Radin(lat2);
-    double deltFI = convert2Radin(lat2 - lat1);
-    double deltLamda = convert2Radin(lon2 - lon1);
-    double a = sin(deltFI/2) * sin(deltFI/2) + cos(FI1)*cos(FI2) * sin(deltLamda/2) * sin(deltLamda/2);
-    double c = 2 * atan2(sqrt(a), sqrt(1-a));
+    CGFloat FI1 = convert2Radin(lat1);
+    CGFloat FI2 = convert2Radin(lat2);
+    CGFloat deltFI = convert2Radin(lat2 - lat1);
+    CGFloat deltLamda = convert2Radin(lon2 - lon1);
+    CGFloat a = sin(deltFI/2) * sin(deltFI/2) + cos(FI1)*cos(FI2) * sin(deltLamda/2) * sin(deltLamda/2);
+    CGFloat c = 2 * atan2(sqrt(a), sqrt(1-a));
     return EARTH_RADIUS * c;
 }
 
-double convert2Radin(double deg) {
+CGFloat convert2Radin(CGFloat deg) {
     return deg * M_PI / 180;
 }
 
-double convert2Deg(double rad) {
+CGFloat convert2Deg(CGFloat rad) {
     return rad * 180 / M_PI;
 }
 
-+ (double)altitudeAdvisor {
++ (CGFloat)altitudeAdvisor {
     return 1000.0;
 }
 
@@ -60,9 +60,9 @@ double convert2Deg(double rad) {
  @param yLine  line y = yline
  @return YES indicates theres is a intersection point
  */
-+ (BOOL)getX:(double *)x Y:(double *)y withPoint1:(CGPoint)point1 point2:(CGPoint)point2 withLineY:(double)yLine {
-    double minY = (point1.y <= point2.y ? point1.y : point2.y);
-    double maxY = (point1.y >= point2.y ? point1.y : point2.y);
++ (BOOL)getX:(CGFloat *)x Y:(CGFloat *)y withPoint1:(CGPoint)point1 point2:(CGPoint)point2 withLineY:(CGFloat)yLine {
+    CGFloat minY = (point1.y <= point2.y ? point1.y : point2.y);
+    CGFloat maxY = (point1.y >= point2.y ? point1.y : point2.y);
     if (yLine < minY || yLine > maxY) return NO;
     
     if (point2.y - point1.y == 0) {

@@ -16,12 +16,12 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:self.elevationPointName forKey:@"elevationPointName"];
-    [encoder encodeInt:self.index forKey:@"index"];
+    [encoder encodeInt64:self.index forKey:@"index"];
     [encoder encodeDouble:self.lon forKey:@"lon"];
     [encoder encodeDouble:self.lat forKey:@"lat"];
-    [encoder encodeInt:self.level forKey:@"level"];
+    [encoder encodeInt64:self.level forKey:@"level"];
     [encoder encodeInteger:self.fileOffset forKey:@"fileOffset"];
-    [encoder encodeInt:self.elevation forKey:@"elevation"];
+    [encoder encodeInt64:self.elevation forKey:@"elevation"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)decoder {

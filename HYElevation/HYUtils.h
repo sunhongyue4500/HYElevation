@@ -10,11 +10,11 @@
 
 @interface HYUtils : NSObject
 
-+ (double)distanceBetween:(double)lon1 lat1:(double)lat1 andlon2:(double)lon2 lat2:(double)lat2;
-+ (double)altitudeAdvisor;
-+ (BOOL)getX:(double *)x Y:(double *)y withPoint1:(CGPoint)point1 point2:(CGPoint)point2 withLineY:(double)yLine;
++ (CGFloat)distanceBetween:(CGFloat)lon1 lat1:(CGFloat)lat1 andlon2:(CGFloat)lon2 lat2:(CGFloat)lat2;
++ (CGFloat)altitudeAdvisor;
++ (BOOL)getX:(CGFloat *)x Y:(CGFloat *)y withPoint1:(CGPoint)point1 point2:(CGPoint)point2 withLineY:(CGFloat)yLine;
 
-double convert2Radin(double deg);
-double convert2Deg(double rad);
+CGFloat convert2Radin(CGFloat deg);
+CGFloat convert2Deg(CGFloat rad);
 
 @end

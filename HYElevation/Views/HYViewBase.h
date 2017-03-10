@@ -9,9 +9,9 @@
 
 @interface HYViewBase : UIView
 
-@property (nonatomic,assign) CGRect contentRect;
-@property (nonatomic,assign) CGFloat chartHeight;
-@property (nonatomic,assign) CGFloat chartWidth;
+@property (nonatomic, assign) CGRect contentRect;
+@property (nonatomic, assign) CGFloat chartHeight;
+@property (nonatomic, assign) CGFloat chartWidth;
 
 - (void)setupChartOffsetWithLeft:(CGFloat)left
                              top:(CGFloat)top
@@ -22,16 +22,12 @@
 - (void)notifyDeviceOrientationChanged;
 
 - (BOOL)isInBoundsX:(CGFloat)x;
-
 - (BOOL)isInBoundsY:(CGFloat)y;
-
 - (BOOL)isInBoundsX:(CGFloat)x y:(CGFloat)y;
 
 - (BOOL)isInBoundsLeft:(CGFloat)x;
 - (BOOL)isInBoundsRight:(CGFloat)x;
-
 - (BOOL)isInBoundsTop:(CGFloat)y;
-
 - (BOOL)isInBoundsBottom:(CGFloat)y;
 
 - (CGFloat)contentTop;

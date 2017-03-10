@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad12_9" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,11 +18,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q3F-Oz-qL4" customClass="HYElevationView">
-                                <rect key="frame" x="10" y="603" width="608" height="160"/>
+                                <rect key="frame" x="208" y="254" width="608" height="160"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="608" id="HfW-Z6-cgw"/>
@@ -30,7 +30,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ija-V2-9FI">
-                                <rect key="frame" x="628" y="648.5" width="155.5" height="69.5"/>
+                                <rect key="frame" x="434.5" y="422" width="155.5" height="69.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wrH-tJ-jwP">
                                         <rect key="frame" x="0.0" y="0.0" width="76" height="69.5"/>
@@ -83,10 +83,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.56078431370000004" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Q3F-Oz-qL4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="8Cp-jM-t5b"/>
-                            <constraint firstItem="ija-V2-9FI" firstAttribute="centerY" secondItem="Q3F-Oz-qL4" secondAttribute="centerY" id="EGZ-Aq-DWj"/>
-                            <constraint firstItem="Q3F-Oz-qL4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="UTk-Zy-ouN"/>
-                            <constraint firstItem="ija-V2-9FI" firstAttribute="leading" secondItem="Q3F-Oz-qL4" secondAttribute="trailing" constant="10" id="qRB-ga-hMI"/>
+                            <constraint firstItem="Q3F-Oz-qL4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ait-DN-H4e"/>
+                            <constraint firstItem="ija-V2-9FI" firstAttribute="centerX" secondItem="Q3F-Oz-qL4" secondAttribute="centerX" id="Jng-dh-egr"/>
+                            <constraint firstItem="Q3F-Oz-qL4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-50" id="UTk-Zy-ouN"/>
+                            <constraint firstItem="ija-V2-9FI" firstAttribute="top" secondItem="Q3F-Oz-qL4" secondAttribute="bottom" constant="8" id="uyt-lu-lc4"/>
                         </constraints>
                     </view>
                     <connections>

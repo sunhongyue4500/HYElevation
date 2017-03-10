@@ -24,14 +24,11 @@
     return self;
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
 }
 
-- (void)drawGridBackground:(CGContextRef)context
-                      rect:(CGRect)rect;
-{
+- (void)drawGridBackground:(CGContextRef)context rect:(CGRect)rect {
     UIColor * backgroundColor = self.gridBackgroundColor?:[UIColor whiteColor];
     CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
     CGContextFillRect(context, rect);
@@ -42,28 +39,17 @@
     CGContextStrokeRect(context, CGRectMake(self.contentLeft, self.contentTop, self.contentWidth, self.contentHeight));
 }
 
-- (void)drawHighlighted:(CGContextRef)context
-                  point:(CGPoint)point
-            circleColor:(UIColor *)circleColor
-              lineColor:(UIColor *)lineColor
-              lineWidth:(CGFloat)lineWidth
-{
+- (void)drawHighlighted:(CGContextRef)context point:(CGPoint)point circleColor:(UIColor *)circleColor lineColor:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth {
     [self drawDashline:context startPoint:CGPointMake(point.x, self.contentBottom) stopPoint:CGPointMake(point.x, self.contentTop) color:lineColor lineWidth:0.8 realDistance:7 dashDistance:3 horizonFlag:NO];
     CGFloat radius = 5.0;
     [self drawCirclePoint:context point:CGPointMake(point.x - (radius / 2.0), point.y - (radius / 2.0)) radius:radius color:circleColor];
 }
 
-- (void)drawLabel:(CGContextRef)context
-   attributesText:(NSAttributedString *)attributesText
-             rect:(CGRect)rect
-{
+- (void)drawLabel:(CGContextRef)context attributesText:(NSAttributedString *)attributesText rect:(CGRect)rect {
     [attributesText drawInRect:rect];
 }
 
-- (void)drawRect:(CGContextRef)context
-            rect:(CGRect)rect
-           color:(UIColor*)color
-{
+- (void)drawRect:(CGContextRef)context rect:(CGRect)rect color:(UIColor*)color {
     if ((rect.origin.x + rect.size.width) > self.contentRight) {
         return;
     }
@@ -71,12 +57,7 @@
     CGContextFillRect(context, rect);
 }
 
-- (void)drawRect:(CGContextRef)context
-            rect:(CGRect)rect
-       fillColor:(UIColor*)fillColor
-     borderColor:(UIColor*)borederColor
-          isFill:(BOOL)flag
-{
+- (void)drawRect:(CGContextRef)context rect:(CGRect)rect fillColor:(UIColor*)fillColor borderColor:(UIColor*)borederColor isFill:(BOOL)flag {
     CGContextSetStrokeColorWithColor(context, borederColor.CGColor);
     CGContextStrokeRectWithWidth(context, rect, 0.8);
     if (flag) {
@@ -85,10 +66,7 @@
     }
 }
 
-- (void)drawPath:(CGContextRef)context
-       fillColor:(UIColor*)fillColor
-          points:(NSArray *)array
-{
+- (void)drawPath:(CGContextRef)context fillColor:(UIColor*)fillColor points:(NSArray *)array {
     if (!array || array.count < 2) return;
     CGPoint startPoint = [array[0] CGPointValue];
     CGPoint endPoint = [array[array.count-1] CGPointValue];
@@ -100,19 +78,14 @@
     CGContextSetFillColorWithColor(context, fillColor.CGColor);
     CGContextSetStrokeColorWithColor(context, fillColor.CGColor);
     CGContextMoveToPoint(context, startPoint.x, startPoint.y);
-    for (int i=1; i<array.count; i++) {
+    for (NSUInteger i=1; i<array.count; i++) {
         currentPoint = [array[i] CGPointValue];
         CGContextAddLineToPoint(context, currentPoint.x,currentPoint.y);
     }
     CGContextFillPath(context);
 }
 
-- (void)drawPath:(CGContextRef)context
-       fillColor:(UIColor*)fillColor
-          points:(NSArray *)array
-        clipRect:(CGRect)rect
-{
-    
+- (void)drawPath:(CGContextRef)context fillColor:(UIColor*)fillColor points:(NSArray *)array clipRect:(CGRect)rect {
     if (!array || array.count < 2) return;
     CGPoint startPoint = [array[0] CGPointValue];
     
@@ -132,7 +105,7 @@
     CGContextSetFillColorWithColor(context, fillColor.CGColor);
     CGContextSetStrokeColorWithColor(context, fillColor.CGColor);
     CGContextMoveToPoint(context, startPoint.x, startPoint.y);
-    for (int i=1; i<array.count; i++) {
+    for (NSUInteger i=1; i<array.count; i++) {
         currentPoint = [array[i] CGPointValue];
         CGContextAddLineToPoint(context, currentPoint.x,currentPoint.y);
     }
@@ -144,20 +117,12 @@
 
 
 
--(void)drawCirclePoint:(CGContextRef)context
-                point:(CGPoint)point
-               radius:(CGFloat)radius
-                color:(UIColor*)color{
+-(void)drawCirclePoint:(CGContextRef)context point:(CGPoint)point radius:(CGFloat)radius color:(UIColor*)color{
     CGContextSetFillColorWithColor(context, color.CGColor);
     CGContextFillEllipseInRect(context, CGRectMake(point.x, point.y, radius, radius));
 }
 
-- (void)drawline:(CGContextRef)context
-      startPoint:(CGPoint)startPoint
-       stopPoint:(CGPoint)stopPoint
-           color:(UIColor *)color
-       lineWidth:(CGFloat)lineWitdth
-{
+- (void)drawline:(CGContextRef)context startPoint:(CGPoint)startPoint stopPoint:(CGPoint)stopPoint color:(UIColor *)color lineWidth:(CGFloat)lineWitdth {
     if (startPoint.x < self.contentLeft ||stopPoint.x >self.contentRight || startPoint.y <self.contentTop || stopPoint.y < self.contentTop) {
         return;
     }
@@ -169,23 +134,15 @@
     CGContextStrokePath(context);
 }
 
-- (void)drawDashline:(CGContextRef)context
-          startPoint:(CGPoint)startPoint
-           stopPoint:(CGPoint)stopPoint
-               color:(UIColor *)color
-           lineWidth:(CGFloat)lineWitdth
-        realDistance:(CGFloat)realDistance
-        dashDistance:(CGFloat)dashDistance
-         horizonFlag:(BOOL)flag
-{
+- (void)drawDashline:(CGContextRef)context startPoint:(CGPoint)startPoint stopPoint:(CGPoint)stopPoint color:(UIColor *)color lineWidth:(CGFloat)lineWitdth realDistance:(CGFloat)realDistance dashDistance:(CGFloat)dashDistance horizonFlag:(BOOL)flag {
     CGContextSetStrokeColorWithColor(context, color.CGColor);
     CGContextSetLineWidth(context, lineWitdth);
-    int asend;
-    double darwCount;
+    NSInteger asend;
+    CGFloat darwCount;
     if (flag) {
         darwCount = (stopPoint.x - startPoint.x) / (realDistance + dashDistance);
         asend = (stopPoint.x >= startPoint.x ? 1 : -1);
-        for (int i = 0; i <= round(fabs(darwCount)); i++) {
+        for (NSUInteger i = 0; i <= round(fabs(darwCount)); i++) {
             CGContextBeginPath(context);
             CGContextMoveToPoint(context, startPoint.x + (realDistance + dashDistance) * i * asend, startPoint.y);
             CGContextAddLineToPoint(context, startPoint.x + ((realDistance + dashDistance) * i + realDistance) * asend, startPoint.y);
@@ -194,7 +151,7 @@
     } else {
         darwCount = (stopPoint.y - startPoint.y) / (realDistance + dashDistance);
         asend = (stopPoint.y >= startPoint.y ? 1 : -1);
-        for (int i = 0; i <= round(fabs(darwCount)); i++) {
+        for (NSUInteger i = 0; i <= round(fabs(darwCount)); i++) {
             CGContextBeginPath(context);
             CGContextMoveToPoint(context, startPoint.x, startPoint.y + (realDistance + dashDistance) * i * asend);
             CGContextAddLineToPoint(context, startPoint.x, startPoint.y + ((realDistance + dashDistance) * i + realDistance) * asend) ;
@@ -203,12 +160,7 @@
     }
 }
 
-- (void)drawRectAndLabel:(CGContextRef)context
-                    rect:(CGRect)rect
-               fillColor:(UIColor*)fillColor
-             borderColor:(UIColor*)borderColor
-          attributesText:(NSAttributedString *)attributesText
-{
+- (void)drawRectAndLabel:(CGContextRef)context rect:(CGRect)rect fillColor:(UIColor*)fillColor borderColor:(UIColor*)borderColor attributesText:(NSAttributedString *)attributesText {
     [self drawRect:context rect:rect fillColor:fillColor borderColor:borderColor isFill:YES];
     [self drawLabel:context attributesText:attributesText rect:rect];
 }

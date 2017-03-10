@@ -15,8 +15,7 @@
 - (void)chartValueSelected:(HYViewBase *)chartView entry:(id)entry entryIndex:(NSInteger)entryIndex;
 - (void)chartValueNothingSelected:(HYViewBase *)chartView;
 
-- (void)chartKlineScrollLeft:(HYViewBase *)chartView;
-
+- (void)chartLineScrollLeft:(HYViewBase *)chartView;
 /** chart changed*/
 - (void)chartChanged:(HYViewBase *)chartView;
 
@@ -25,38 +24,38 @@
 @interface HYChartViewBase : HYViewBase
 
 /** bottom footer height*/
-@property (nonatomic,assign) CGFloat xAxisHeitht;
+@property (nonatomic, assign) CGFloat xAxisHeitht;
 
-@property (nonatomic,strong) UIColor *gridBackgroundColor;
-@property (nonatomic,strong) UIColor *borderColor;
-@property (nonatomic,assign) CGFloat borderWidth;
-
-
-@property (nonatomic,assign)CGFloat maxElevation;
-@property (nonatomic,assign)CGFloat minElevation;
-@property (nonatomic,assign)CGFloat maxVolume;
-@property (nonatomic,assign)CGFloat candleCoordsScale;
-
-@property (nonatomic,assign)NSInteger highlightLineCurrentIndex;
-@property (nonatomic,assign)CGPoint highlightLineCurrentPoint;
-@property (nonatomic,assign)BOOL highlightLineCurrentEnabled;
-
-@property (nonatomic,strong)NSDictionary *leftYAxisAttributedDic;
-@property (nonatomic,strong)NSDictionary *xAxisAttributedDic;
-@property (nonatomic,strong)NSDictionary *highlightAttributedDic;
-@property (nonatomic,strong)NSDictionary *defaultAttributedDic;
-
-@property (nonatomic,assign)BOOL highlightLineShowEnabled;
-@property (nonatomic,assign)BOOL scrollEnabled;
-@property (nonatomic,assign)BOOL zoomEnabled;
-
-@property (nonatomic,assign)BOOL leftYAxisIsInChart;
-@property (nonatomic,assign)BOOL rightYAxisDrawEnabled;
-
-@property (nonatomic, weak) id<HYChartViewDelegate>  delegate;
+@property (nonatomic, strong) UIColor *gridBackgroundColor;
+@property (nonatomic, strong) UIColor *borderColor;
+@property (nonatomic, assign) CGFloat borderWidth;
 
 
-@property (nonatomic,assign)BOOL isETF;
+@property (nonatomic, assign) CGFloat maxElevation;
+@property (nonatomic, assign) CGFloat minElevation;
+@property (nonatomic, assign) CGFloat maxVolume;
+@property (nonatomic, assign) CGFloat candleCoordsScale;
+
+@property (nonatomic, assign) NSInteger highlightLineCurrentIndex;
+@property (nonatomic, assign) CGPoint highlightLineCurrentPoint;
+@property (nonatomic, assign) BOOL highlightLineCurrentEnabled;
+
+@property (nonatomic, strong) NSDictionary *leftYAxisAttributedDic;
+@property (nonatomic, strong) NSDictionary *xAxisAttributedDic;
+@property (nonatomic, strong) NSDictionary *highlightAttributedDic;
+@property (nonatomic, strong) NSDictionary *defaultAttributedDic;
+
+@property (nonatomic, assign) BOOL highlightLineShowEnabled;
+@property (nonatomic, assign) BOOL scrollEnabled;
+@property (nonatomic, assign) BOOL zoomEnabled;
+
+@property (nonatomic, assign) BOOL leftYAxisIsInChart;
+@property (nonatomic, assign) BOOL rightYAxisDrawEnabled;
+
+@property (nonatomic, weak) id<HYChartViewDelegate> delegate;
+
+
+@property (nonatomic,assign) BOOL isETF;
 
 
 - (void)drawline:(CGContextRef)context

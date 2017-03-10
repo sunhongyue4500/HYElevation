@@ -7,20 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface HYElevationPoint : NSObject
 
 @property (nonatomic, copy) NSString *elevationPointName;
 
-@property (nonatomic, assign) int index;
+@property (nonatomic, assign) NSUInteger index;
 /** longtitude(deg)*/
-@property (nonatomic, assign) double lon;
+@property (nonatomic, assign) CGFloat lon;
 /** latitude(deg)*/
-@property (nonatomic, assign) double lat;
+@property (nonatomic, assign) CGFloat lat;
 
-@property (nonatomic, assign) int level;
-@property (nonatomic, assign) long fileOffset;
+@property (nonatomic, assign) NSUInteger level;
+@property (nonatomic, assign) NSUInteger fileOffset;
 /** elevation(m)*/
-@property (nonatomic, assign) int elevation;
+@property (nonatomic, assign) NSInteger elevation;
 
 @end
