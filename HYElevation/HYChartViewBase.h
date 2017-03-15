@@ -15,6 +15,7 @@
 - (void)chartValueSelected:(HYViewBase *)chartView entry:(id)entry entryIndex:(NSInteger)entryIndex;
 - (void)chartValueNothingSelected:(HYViewBase *)chartView;
 
+/** 滑到最左边*/
 - (void)chartLineScrollLeft:(HYViewBase *)chartView;
 /** chart changed*/
 - (void)chartChanged:(HYViewBase *)chartView;
@@ -30,8 +31,9 @@
 @property (nonatomic, strong) UIColor *borderColor;
 @property (nonatomic, assign) CGFloat borderWidth;
 
-
+/** 最大高程值*/
 @property (nonatomic, assign) CGFloat maxElevation;
+/** 最小高程值*/
 @property (nonatomic, assign) CGFloat minElevation;
 @property (nonatomic, assign) CGFloat maxVolume;
 @property (nonatomic, assign) CGFloat candleCoordsScale;
@@ -103,6 +105,11 @@
           attributesText:(NSAttributedString *)attributesText;
 
 - (void)drawPath:(CGContextRef)context
+     strokeColor:(UIColor*)fillColor
+          points:(NSArray *)array
+       lineWidth:(CGFloat)lineWitdth;
+
+- (void)drawPath:(CGContextRef)context
        fillColor:(UIColor*)fillColor
           points:(NSArray *)array;
 
@@ -111,7 +118,8 @@
           points:(NSArray *)array
         clipRect:(CGRect)rect;
 
-- (void)drawGridBackground:(CGContextRef)context
+/** 绘制整个view的背景*/
+- (void)drawBackground:(CGContextRef)context
                       rect:(CGRect)rect;
 
 

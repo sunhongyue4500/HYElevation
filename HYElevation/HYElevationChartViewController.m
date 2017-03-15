@@ -38,13 +38,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    /** 给下面的航路点以及上面的比例尺留出空间*/
     [self.elevationLineView setupChartOffsetWithLeft:0 top:10 right:0 bottom:16];
     self.elevationLineView.gridBackgroundColor = kElevationChartClearColor;
     self.elevationLineView.borderColor = kElevationChartBorderColor;
     self.elevationLineView.borderWidth = .5;
     self.elevationLineView.bottomRectHeight = 16;
-    
+    /** 默认的两点间距*/
     self.elevationLineView.candleWidth = 8;
     self.elevationLineView.candleMaxWidth = 30;
     
@@ -99,9 +99,19 @@
 
 #pragma mark - **************** Private
 
+
+/**
+ 设置数据源
+
+ @param chartData HYElevationPoint数组，不能为nil
+ */
 - (void)setChartData:(NSArray *)chartData {
     if (chartData) {
         [self.elevationLineView setupData:chartData];
+    } else {
+#ifdef DEBUG
+        NSLog(@"无效数据源");
+#endif
     }
 }
 

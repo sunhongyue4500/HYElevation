@@ -9,8 +9,11 @@
 
 @interface HYViewBase : UIView
 
+/** 内容rect*/
 @property (nonatomic, assign) CGRect contentRect;
+/** 图表高*/
 @property (nonatomic, assign) CGFloat chartHeight;
+/** 图表宽*/
 @property (nonatomic, assign) CGFloat chartWidth;
 
 - (void)setupChartOffsetWithLeft:(CGFloat)left
@@ -30,6 +33,7 @@
 - (BOOL)isInBoundsTop:(CGFloat)y;
 - (BOOL)isInBoundsBottom:(CGFloat)y;
 
+/** 内容的最顶坐标*/
 - (CGFloat)contentTop;
 - (CGFloat)contentLeft;
 - (CGFloat)contentRight;

@@ -28,8 +28,8 @@
     [super drawRect:rect];
 }
 
-- (void)drawGridBackground:(CGContextRef)context rect:(CGRect)rect {
-    UIColor * backgroundColor = self.gridBackgroundColor?:[UIColor whiteColor];
+- (void)drawBackground:(CGContextRef)context rect:(CGRect)rect {
+    UIColor * backgroundColor = self.gridBackgroundColor ? : [UIColor whiteColor];
     CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
     CGContextFillRect(context, rect);
     
@@ -64,6 +64,25 @@
         CGContextSetFillColorWithColor(context, fillColor.CGColor);
         CGContextFillRect(context, rect);
     }
+}
+
+- (void)drawPath:(CGContextRef)context strokeColor:(UIColor*)fillColor points:(NSArray *)array lineWidth:(CGFloat)lineWitdth{
+    if (!array || array.count < 2) return;
+    CGPoint startPoint = [array[0] CGPointValue];
+    //CGPoint endPoint = [array[array.count-1] CGPointValue];
+    //if (startPoint.x != endPoint.x || startPoint.y != endPoint.y) return;
+    
+    CGPoint currentPoint;
+    CGContextBeginPath(context);
+    CGContextSetFillColorWithColor(context, fillColor.CGColor);
+    CGContextSetStrokeColorWithColor(context, fillColor.CGColor);
+    CGContextSetLineWidth(context, lineWitdth);
+    CGContextMoveToPoint(context, startPoint.x, startPoint.y);
+    for (NSUInteger i=1; i<array.count; i++) {
+        currentPoint = [array[i] CGPointValue];
+        CGContextAddLineToPoint(context, currentPoint.x,currentPoint.y);
+    }
+    CGContextStrokePath(context);
 }
 
 - (void)drawPath:(CGContextRef)context fillColor:(UIColor*)fillColor points:(NSArray *)array {

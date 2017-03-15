@@ -13,11 +13,11 @@
 
 /** 矩形块的默认宽度, 理解为比例尺*/
 @property (nonatomic, assign) CGFloat candleWidth;
-/** 矩形块的最大宽度*/
+/** 两点间的最大宽度*/
 @property (nonatomic, assign) CGFloat candleMaxWidth;
-/** 矩形块的最小宽度*/
+/** 两点间的最小宽度*/
 @property (nonatomic, assign) CGFloat candleMinWidth;
-/** 底部矩形框的高度*/
+/** 底部显示航路点 矩形框的高度*/
 @property (nonatomic, assign) CGFloat bottomRectHeight;
 /** edit模式下设置的高度*/
 @property (nonatomic, assign) CGFloat altitudeAdvisor;

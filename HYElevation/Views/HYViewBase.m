@@ -9,6 +9,7 @@
 
 @interface HYViewBase ()
 
+/** chart左偏移*/
 @property (nonatomic, assign)CGFloat offsetLeft;
 @property (nonatomic, assign)CGFloat offsetTop;
 @property (nonatomic, assign)CGFloat offsetRight;

@@ -15,8 +15,9 @@
 @interface HYElevationView () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) HYChartDataSet *dataSet;
-/** show count*/
+/** 能显示的candleWidth个数*/
 @property (nonatomic, assign) NSInteger countOfShow;
+/** 从数据源的第startDrawIndex个数据开始*/
 @property (nonatomic, assign) NSInteger startDrawIndex;
 /** 绘制的单个比例尺的长度*/
 @property (nonatomic, assign) CGFloat measureWidth;
@@ -27,11 +28,11 @@
 @property (nonatomic, strong) UITapGestureRecognizer * tapGesture;
 
 @property (nonatomic, strong) UIButton *altitudeAdvisorBtn;
+/** 保存上一次的Pinch scale，手势结束时设置为1.0*/
 @property (nonatomic, assign) CGFloat lastPinScale;
-@property (nonatomic, assign) CGFloat lastPinCount;
 /** Pinch center point*/
 @property (nonatomic, assign) CGPoint pinchCenterPoint;
-/** 中心点索引*/
+/** Pinch中心点索引*/
 @property (nonatomic, assign) NSUInteger pinchCenterPointIndex;
 
 
@@ -41,6 +42,7 @@
 
 @property (nonatomic, assign) CGFloat highlightLineWidth;
 @property (nonatomic, strong) UIColor *highlightLineColor;
+/** chart line外边沿线宽度*/
 @property (nonatomic, assign) CGFloat avgLineWidth;
 
 @end
@@ -140,9 +142,8 @@
     if (self.dataSet.data.count > 0) {
         self.maxElevation = CGFLOAT_MIN;
         self.minElevation = CGFLOAT_MAX;
-        
-        for (NSInteger i = 0; i < self.dataSet.data.count; i++) {
-            HYElevationPoint  * entity = [self.dataSet.data objectAtIndex:i];
+        for (NSUInteger i = 0; i < self.dataSet.data.count; i++) {
+            HYElevationPoint  * entity = self.dataSet.data[i];
             self.minElevation = (self.minElevation < entity.elevation ? self.minElevation : entity.elevation);
             self.maxElevation = (self.maxElevation > entity.elevation ? self.maxElevation : entity.elevation);
         }
@@ -157,26 +158,25 @@
 #pragma mark - **************** Draw
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
-    
-    [self setCurrentDataMaxAndMin];
-    
     CGContextRef context = UIGraphicsGetCurrentContext();
-
-    [self drawGridBackground:context rect:rect];
+    /** 绘制背景*/
+    [self drawBackground:context rect:rect];
+    /** 绘制高程chart部分背景*/
     [self drawChartBackground:context rect:rect];
-    // draw bottom label background
+    /** 绘制chart底部背景，rect原点在左上角*/
     CGRect bottomLabelRect = CGRectMake(rect.origin.x, rect.size.height - self.bottomRectHeight, rect.size.width, self.bottomRectHeight);
     [self drawRect:context rect:bottomLabelRect color:kMainPanelBackgroundColor];
-    // draw elevation chart content
+    /** 绘制高程chart内容*/
     if (self.dataSet.data.count) {
         [self drawCandle:context];
     }
-    // update controller right label
+    /** 更新外部label信息*/
     if ([self.delegate respondsToSelector:@selector(chartChanged:)]) {
         [self.delegate chartChanged:self];
     }
 }
 
+/** 绘制高程chart背景*/
 - (void)drawChartBackground:(CGContextRef)context rect:(CGRect)rect {
     // 当前视野开始的索引
     NSInteger idex = self.startDrawIndex;
@@ -204,17 +204,16 @@
     [self drawRect:context rect:CGRectMake(self.contentLeft + seperateStart - self.contentLeft, 0, self.contentWidth - seperateStart, self.contentHeight + self.contentTop) color:kElevationChartBackgroundRightBackgroundColor];
 }
 
-- (void)drawGridBackground:(CGContextRef)context rect:(CGRect)rect {
-    [super drawGridBackground:context rect:rect];
+- (void)drawBackground:(CGContextRef)context rect:(CGRect)rect {
+    [super drawBackground:context rect:rect];
 }
 
 /**
  1. 绘制比例尺
- 2. 绘制颜色区
- 3. 绘制底部label
- 4. 绘制chart line
- 5. 绘制Altitude Advisor Btn 和 Dashline
- 6. 绘制长按Dashline
+ 2. 绘制颜色区和外边沿线
+ 3. 绘制底部高程点label
+ 4. 绘制Altitude Advisor Dashline
+ 5. 绘制长按Dashline和高程值label
 
  @param context context
  */
@@ -226,21 +225,21 @@
     self.candleCoordsScale = self.contentHeight / (self.maxElevation - self.minElevation);
     
     #pragma mark **************** 绘制比例尺
-    HYElevationPoint *startEntity = [self.dataSet.data objectAtIndex:0];
+    HYElevationPoint *startEntity = self.dataSet.data[0];
     HYElevationPoint *endEntity = [self.dataSet.data objectAtIndex:self.dataSet.data.count - 1];
     CGFloat distance = [HYUtils distanceBetween:startEntity.lon lat1:startEntity.lat andlon2:endEntity.lon lat2:endEntity.lat];
     // 一个candleWidth代表多少km
-    CGFloat kmPerCandleWidth = distance / self.dataSet.data.count;
+    CGFloat kmPerCandle = distance / self.dataSet.data.count;
     // 多少距离画一个 25,50,100....
-    CGFloat measureScale = [self scaleByDistance:self.countOfShow * kmPerCandleWidth];
-    // 多长画一个 self.candleWidth / kmPerCandleWidth 代表屏幕单位距离的km数
-    CGFloat drawLength = (self.candleWidth / kmPerCandleWidth) * measureScale;
+    CGFloat measureScale = [self scaleByDistance:self.countOfShow * kmPerCandle];
+    // 多长画一个 self.candleWidth / kmPerCandle 代表屏幕单位距离的km数
+    CGFloat drawLength = (self.candleWidth / kmPerCandle) * measureScale;
     
     HYElevationPoint *idexEntity = [self.dataSet.data objectAtIndex:idex];
     // 得到idex到起点的距离
     CGFloat idexOffset = [HYUtils distanceBetween:startEntity.lon lat1:startEntity.lat andlon2:idexEntity.lon lat2:idexEntity.lat];
-    // 得到idex到起点的屏幕偏移
-    CGFloat screenOffset = (self.candleWidth / kmPerCandleWidth) * idexOffset;
+    // 得到idex到起点的屏幕偏移 (单位km的candleWidth * Km数) 目的是从头开始绘制
+    CGFloat screenOffset = (self.candleWidth / kmPerCandle) * idexOffset;
     
     NSString *scaleStr;
     NSDictionary *dicAttr = @{NSFontAttributeName:kElevationChartMeasureScaleFont,NSForegroundColorAttributeName:kElevationChartClearColor};
@@ -261,7 +260,7 @@
         counter++;
     }
     
-    #pragma mark **************** 绘制颜色区
+    #pragma mark **************** 绘制颜色区和外边沿线
     CGFloat startEntityX = 0.0;
     CGFloat startEntityY = 0.0;
     NSMutableArray *elevationPoints = [NSMutableArray array];
@@ -285,8 +284,11 @@
     [self drawPath:context fillColor:kElevationChartGreenArea points:elevationPoints clipRect:CGRectMake(0, yellowWarnY, self.contentWidth, self.contentHeight + self.contentTop - yellowWarnY)];
     [self drawPath:context fillColor:kElevationChartYellowArea points:elevationPoints clipRect:CGRectMake(0, redWarnY, self.contentWidth, yellowWarnY - redWarnY)];
     [self drawPath:context fillColor:kElevationChartRedArea points:elevationPoints clipRect:CGRectMake(0, 0, self.contentWidth, redWarnY)];
+    /** 绘制外边沿线*/
+    [self drawPath:context strokeColor:kElevationChartClearColor points:elevationPoints lineWidth:self.avgLineWidth];
     
-    #pragma mark **************** 绘制底部高程点
+    
+    #pragma mark **************** 绘制长按Dashline和高程值label
     CGRect labelRect = CGRectZero;
     /** 保存上一次绘制的位置*/
     CGRect lastRect = CGRectZero;
@@ -295,6 +297,7 @@
     for (NSInteger i = idex; i <= idex + self.countOfShow && i < self.dataSet.data.count; i++) {
         HYElevationPoint *entity = [self.dataSet.data objectAtIndex:i];
         CGFloat startX = (self.candleWidth * (i - idex) + self.contentLeft);
+        // 在底部绘制有名字的航路点
         if (entity.elevationPointName) {
             // 绘制竖线
             [self drawline:context startPoint:CGPointMake(startX, self.contentTop) stopPoint:CGPointMake(startX, self.contentHeight + self.contentTop) color:self.borderColor lineWidth:1];
@@ -316,23 +319,14 @@
             labelRect = CGRectMake(labelStartX,(self.contentHeight + self.contentTop), dateStrAttSize.width, dateStrAttSize.height);
             // 相交
             if (CGRectEqualToRect(lastRect, CGRectZero) || !isXIntersectionWithRect(labelRect, lastRect)) {
+                /** 绘制label*/
                 [self drawLabel:context attributesText:dateStrAtt rect:labelRect];
                 lastRect = labelRect;
             }
         }
-    #pragma mark **************** 绘制chart line
-        if (i > 0){
-            HYElevationPoint *lastEntity = [self.dataSet.data objectAtIndex:i - 1];
-            CGFloat lastX = startX - self.candleWidth;
-            CGFloat lastY5 = (self.maxElevation - lastEntity.elevation) * self.candleCoordsScale + self.contentTop;
-            CGFloat y5 = (self.maxElevation - entity.elevation) * self.candleCoordsScale + self.contentTop;
-            if (entity.elevation >= 0 && lastEntity.elevation >= 0) {
-                [self drawline:context startPoint:CGPointMake(lastX, lastY5) stopPoint:CGPointMake(startX, y5) color:kElevationChartClearColor lineWidth:self.avgLineWidth];
-            }
-        }
     }
     
-    #pragma mark **************** 绘制Altitude Advisor Btn and DashLine
+    #pragma mark **************** 绘制Altitude Advisor Dashline
     CGFloat lineWidth = 1;
     [self drawDashline:context startPoint:CGPointMake(self.contentLeft + ElEVATION_CHART_ALTITUDE_ADVISOR_OFFSET, altitudeAdvisorY) stopPoint:CGPointMake(self.contentLeft, altitudeAdvisorY) color:kElevationChartClearColor lineWidth:lineWidth realDistance:ELEVATION_CHART_REAL_LINE_DISTANCE dashDistance:ELEVATION_CHART_DSSH_LINE_DISTANCE horizonFlag:YES];
     [self drawDashline:context startPoint:CGPointMake(self.contentLeft + ElEVATION_CHART_ALTITUDE_ADVISOR_OFFSET + self.altitudeAdvisorBtn.frame.size.width, altitudeAdvisorY) stopPoint:CGPointMake(self.contentRight, altitudeAdvisorY) color:kElevationChartClearColor lineWidth:lineWidth realDistance:ELEVATION_CHART_REAL_LINE_DISTANCE dashDistance:ELEVATION_CHART_DSSH_LINE_DISTANCE horizonFlag:YES];
@@ -394,12 +388,13 @@
     [super notifyDataSetChanged];
     [self adjustCandleMinWidth];
     self.candleWidth = self.candleMinWidth;
-    
+    /** 设置最小和最大高程*/
+    [self setCurrentDataMaxAndMin];
     // invoke layoutSubviews
     [self setNeedsDisplay];
     
     self.altitudeAdvisor = [HYUtils altitudeAdvisor];
-    [self setUpAltitudeAdvisorBtn];
+    [self setupAltitudeAdvisorBtn];
     self.startDrawIndex = 0;
     self.highestPointValue = [self highestElevationPointValue];
 }
@@ -424,18 +419,11 @@
     }
     
     self.highlightLineCurrentEnabled = NO;
-    
     CGPoint point = [recognizer translationInView:self];
-    
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-    }
-    if (recognizer.state == UIGestureRecognizerStateChanged) {
-    }
-    
     CGFloat offset = point.x;
 
 #ifdef DEBUG
-    NSLog(@"%ld=======,%.2f,%.2f",(long)self.startDrawIndex,offset,[recognizer velocityInView:self].x);
+    NSLog(@"%ld=======,%.2f,%.2f",(long)self.startDrawIndex, offset, [recognizer velocityInView:self].x);
 #endif
     if (offset > 0) {
         // 向右滑
@@ -449,14 +437,12 @@
                 [self.delegate chartLineScrollLeft:self];
             }
         }
-    }else{
+    } else {
         // 向左滑
         NSInteger offsetIndex = (-offset) / 4.0;
         self.startDrawIndex += offsetIndex;
     }
-    if (recognizer.state == UIGestureRecognizerStateEnded) {
-        
-    }
+
     [self setNeedsDisplay];
     [recognizer setTranslation:CGPointMake(0, 0) inView:self];
 }
@@ -472,13 +458,7 @@
     if (!self.zoomEnabled) {
         return;
     }
-    
     self.highlightLineCurrentEnabled = NO;
-    
-    if (recognizer.state == UIGestureRecognizerStateEnded)  {
-        self.lastPinScale = 1.0f;
-        return;
-    }
     if (recognizer.state == UIGestureRecognizerStateBegan)  {
         // 确立中心点
         CGPoint point0 = [recognizer locationOfTouch:0 inView:self];
@@ -497,6 +477,9 @@
         // 计算startDrawIndex
         self.startDrawIndex = self.pinchCenterPointIndex - (self.pinchCenterPoint.x - self.contentLeft) / self.candleWidth;
         [self setNeedsDisplay];
+    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
+        self.lastPinScale = 1.0f;
+        return;
     }
 #ifdef DEBUG
     NSLog(@"recognizer.scale:%f", recognizer.scale);
@@ -506,7 +489,7 @@
 
 - (UILongPressGestureRecognizer *)longPressGesture {
     if (!_longPressGesture) {
-        _longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPressGestureAction:)];
+        _longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGestureAction:)];
         _longPressGesture.minimumPressDuration = 0.5;
     }
     return _longPressGesture;
@@ -528,7 +511,6 @@
             self.highlightLineCurrentEnabled = YES;
             [self getHighlightByTouchPoint:point];
         }
-    }else if (recognizer.state == UIGestureRecognizerStateEnded) {
     }
 }
 
@@ -648,7 +630,7 @@
 }
 
 /** set Altitude Advisor btn initial position*/
-- (void)setUpAltitudeAdvisorBtn {
+- (void)setupAltitudeAdvisorBtn {
     // async
     dispatch_async(dispatch_get_main_queue(), ^{
         CGFloat tempY = (self.maxElevation - self.altitudeAdvisor) * self.candleCoordsScale + self.contentTop;
