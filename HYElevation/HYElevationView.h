@@ -33,7 +33,9 @@
 @property (nonatomic, assign, readonly) NSInteger firstStrikeIndex;
 
 - (void)adjustCandleMinWidth;
+/** 设置数据源*/
 - (void)setupData:(NSArray *)data;
+/** 获取数据源数据*/
 - (NSArray *)dataSetData;
 
 @end

@@ -14,7 +14,7 @@
 @implementation HYUtils
 
 /**
- *  calculate two position distance 参考：http://www.movable-type.co.uk/scripts/latlong.html
+ *  calculate two position distance ref：http://www.movable-type.co.uk/scripts/latlong.html
  *
  *  @param lon1 lon1(deg)
  *  @param lat1 lat1(deg)

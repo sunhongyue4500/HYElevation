@@ -11,9 +11,6 @@
 
 @interface HYChartDataSet : NSObject
 
-@property (nonatomic, strong) NSMutableArray *data;
-@property (nonatomic, assign) CGFloat highlightLineWidth;
-@property (nonatomic, strong) UIColor *highlightLineColor;
-@property (nonatomic, assign) CGFloat avgLineWidth;
+@property (nonatomic, copy) NSArray *data;
 
 @end

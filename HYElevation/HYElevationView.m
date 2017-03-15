@@ -39,6 +39,10 @@
 @property (nonatomic, assign, readwrite) CGFloat clearanceValue;
 @property (nonatomic, assign, readwrite) NSInteger firstStrikeIndex;
 
+@property (nonatomic, assign) CGFloat highlightLineWidth;
+@property (nonatomic, strong) UIColor *highlightLineColor;
+@property (nonatomic, assign) CGFloat avgLineWidth;
+
 @end
 
 @implementation HYElevationView
@@ -63,6 +67,10 @@
     self.candleCoordsScale = 0.f;
     self.measureWidth = 8;
     self.lastPinScale = 1.0;
+    
+    self.highlightLineColor = kElevationChartClearColor;
+    self.highlightLineWidth = 1;
+    self.avgLineWidth = 1.f;
     
     [self addGestureRecognizer:self.panGesture];
     [self addGestureRecognizer:self.pinGesture];
@@ -95,8 +103,10 @@
     else  _candleWidth = candleWidth;
 }
 
--(void)setupData:(NSArray *)data {
-    self.dataSet.data = [NSMutableArray arrayWithArray:data];
+#pragma mark - **************** Custom Accessors
+
+- (void)setupData:(NSArray *)data {
+    self.dataSet.data = data;
     [self notifyDataSetChanged];
 }
 
@@ -104,9 +114,6 @@
 - (HYChartDataSet *)dataSet {
     if (!_dataSet) {
         _dataSet = [[HYChartDataSet alloc] init];
-        _dataSet.highlightLineColor = kElevationChartClearColor;
-        _dataSet.highlightLineWidth = 1;
-        _dataSet.avgLineWidth = 1.f;
     }
     return _dataSet;
 }
@@ -320,7 +327,7 @@
             CGFloat lastY5 = (self.maxElevation - lastEntity.elevation) * self.candleCoordsScale + self.contentTop;
             CGFloat y5 = (self.maxElevation - entity.elevation) * self.candleCoordsScale + self.contentTop;
             if (entity.elevation >= 0 && lastEntity.elevation >= 0) {
-                [self drawline:context startPoint:CGPointMake(lastX, lastY5) stopPoint:CGPointMake(startX, y5) color:kElevationChartClearColor lineWidth:self.dataSet.avgLineWidth];
+                [self drawline:context startPoint:CGPointMake(lastX, lastY5) stopPoint:CGPointMake(startX, y5) color:kElevationChartClearColor lineWidth:self.avgLineWidth];
             }
         }
     }
@@ -352,7 +359,7 @@
                 if (i < self.dataSet.data.count) {
                     entity = [self.dataSet.data objectAtIndex:i];
                 }
-                [self drawHighlighted:context point:CGPointMake(startX, close) circleColor:[UIColor blueColor] lineColor:self.dataSet.highlightLineColor lineWidth:self.dataSet.highlightLineWidth];
+                [self drawHighlighted:context point:CGPointMake(startX, close) circleColor:[UIColor blueColor] lineColor:self.highlightLineColor lineWidth:self.highlightLineWidth];
                 
                 elevationStrX = startX - eleRectWidth / 2;
                 if (elevationStrX < self.contentLeft) {

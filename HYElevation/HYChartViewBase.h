@@ -54,10 +54,6 @@
 
 @property (nonatomic, weak) id<HYChartViewDelegate> delegate;
 
-
-@property (nonatomic,assign) BOOL isETF;
-
-
 - (void)drawline:(CGContextRef)context
       startPoint:(CGPoint)startPoint
        stopPoint:(CGPoint)stopPoint
